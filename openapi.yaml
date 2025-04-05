@@ -1,0 +1,53 @@
+openapi: 3.0.3
+info:
+  title: Algo Stats API
+  description: API providing statistics for traP team-algorithm.
+  version: 1.0.0
+servers:
+  - url: https://api.algostats.com/v1
+    description: Production server
+  - url: http://localhost:8080
+    description: Development server
+
+paths:
+  /users:
+    get:
+      summary: Get a list of all users
+      description: Returns a list of all users with their trap account names, AtCoder account names, and AtCoder ratings.
+      responses:
+        '200':
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        trapAccountName:
+          type: string
+          description: The trap account name of the user.
+          example: comavius
+        atcoderAccountName:
+          type: string
+          description: The AtCoder account name of the user.
+          example: comavius
+        atcoderRating:
+          type: integer
+          description: The AtCoder rating of the user.
+          example: 1866
+        heuristicRating:
+          type: integer
+          description: The heuristic rating of the user.
+          example: 1854
+        isAlgoTeam:
+          type: boolean
+          description: Indicates if the user is a member of the Algo team.
+          example: true
+      required:
+        - trapAccountName

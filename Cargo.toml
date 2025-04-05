@@ -1,0 +1,24 @@
+[package]
+name = "algo-stats"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+async-trait = "0.1.88"
+anyhow = "1.0.97"
+uuid = { version = "1.16.0", features = ["v4", "serde"] }
+sqlx = { version = "0.8.3", features = ["mysql", "runtime-tokio"] }
+flate2 = "1.1.1"
+reqwest = "0.12.15"
+tokio = { version = "1.44.1", features = ["full"] }
+serde = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.140"
+traq-bot-http = "0.11.3"
+traq = "0.1.5"
+chrono = "0.4.40"
+regex = "1.11.1"
+tokio-cron-scheduler = "0.13.0"
+axum = "0.8.3"
+tracing = { version = "0.1.37", features = ["log"] }
+tracing-subscriber = { version = "0.3.17", features = ["fmt"] }
+futures ="0.3.31"
