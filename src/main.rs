@@ -20,8 +20,20 @@ async fn main() {
         .init();
     let bot_access_token = std::env::var("TRAQ_BOT_ACCESS_TOKEN")
         .expect("TRAQ_BOT_ACCESS_TOKEN not set");
-    let mysql_url = std::env::var("MYSQL_URL")
-        .expect("MYSQL_URL not set");
+    let mysql_database = std::env::var("NS_MARIADB_DATABASE")
+        .expect("NS_MARIADB_DATABASE not set");
+    let mysql_user = std::env::var("NS_MARIADB_USER")
+        .expect("NS_MARIADB_USER not set");
+    let mysql_password = std::env::var("NS_MARIADB_PASSWORD")
+        .expect("NS_MARIADB_PASSWORD not set");
+    let mysql_host = std::env::var("NS_MARIADB_HOSTNAME")
+        .expect("NS_MARIADB_HOSTNAME not set");
+    let mysql_port = std::env::var("NS_MARIADB_PORT")
+        .expect("NS_MARIADB_PORT not set");
+    let mysql_url = format!(
+        "mysql://{}:{}@{}:{}/{}",
+        mysql_user, mysql_password, mysql_host, mysql_port, mysql_database
+    );
     let update_on_start = std::env::var("UPDATE_ON_START")
         .unwrap_or_else(|_| "false".to_string())
         .parse::<bool>()

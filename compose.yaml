@@ -23,6 +23,11 @@ services:
     env_file:
       - .env
     environment:
+      - NS_MARIADB_USER=user
+      - NS_MARIADB_PORT=3306
+      - NS_MARIADB_PASSWORD=password
+      - NS_MARIADB_HOSTNAME=db
+      - NS_MARIADB_DATABASE=algostats
       - MYSQL_URL=mysql://user:password@db:3306/algostats
       - UPDATE_ON_START=true
     container_name: app_container
