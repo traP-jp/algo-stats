@@ -22,14 +22,19 @@ async fn main() {
         .expect("TRAQ_BOT_ACCESS_TOKEN not set");
     let mysql_database = std::env::var("NS_MARIADB_DATABASE")
         .expect("NS_MARIADB_DATABASE not set");
+    let mysql_database = urlencoding::encode(mysql_database.as_str());
     let mysql_user = std::env::var("NS_MARIADB_USER")
         .expect("NS_MARIADB_USER not set");
+    let mysql_user = urlencoding::encode(mysql_user.as_str());
     let mysql_password = std::env::var("NS_MARIADB_PASSWORD")
         .expect("NS_MARIADB_PASSWORD not set");
+    let mysql_password = urlencoding::encode(mysql_password.as_str());
     let mysql_host = std::env::var("NS_MARIADB_HOSTNAME")
         .expect("NS_MARIADB_HOSTNAME not set");
+    let mysql_host = urlencoding::encode(mysql_host.as_str());
     let mysql_port = std::env::var("NS_MARIADB_PORT")
         .expect("NS_MARIADB_PORT not set");
+    let mysql_port = urlencoding::encode(mysql_port.as_str());
     let mysql_url = format!(
         "mysql://{}:{}@{}:{}/{}",
         mysql_user, mysql_password, mysql_host, mysql_port, mysql_database
