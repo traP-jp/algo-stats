@@ -13,4 +13,8 @@ pub struct User {
     pub heuristic_rating: Option<i32>,
     #[serde(rename = "isAlgoTeam")]
     pub is_algo_team: Option<bool>,
+    #[serde(rename = "isActive")]
+    pub is_active: Option<bool>,
+    #[serde(rename = "grade")]
+    pub grade: Option<String>,
 }

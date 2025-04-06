@@ -124,6 +124,15 @@ where
                     .map(|member| {
                         member.is_algo_team
                     }),
+                is_active: trap_member
+                    .map(|member| {
+                        member.is_active
+                    }),
+                grade: trap_member
+                    .map(|member| {
+                        member.grade.clone()
+                    })
+                    .flatten(),
             };
             users.push(user);
         }

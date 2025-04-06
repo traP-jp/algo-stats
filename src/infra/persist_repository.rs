@@ -33,7 +33,9 @@ impl crate::domain::persist_repository::PersistRepository for PersistRepositoryI
                 `atcoder_account_name`,
                 `atcoder_rating`,
                 `heuristic_rating`,
-                `is_algo_team`
+                `is_algo_team`,
+                `is_active`,
+                `grade`
             )
             "#
         );
@@ -43,7 +45,9 @@ impl crate::domain::persist_repository::PersistRepository for PersistRepositoryI
                 .push_bind(user.atcoder_account_name)
                 .push_bind(user.atcoder_rating)
                 .push_bind(user.heuristic_rating)
-                .push_bind(user.is_algo_team);
+                .push_bind(user.is_algo_team)
+                .push_bind(user.is_active)
+                .push_bind(user.grade);
         });
         query_builder
             .push(
@@ -52,7 +56,9 @@ impl crate::domain::persist_repository::PersistRepository for PersistRepositoryI
                     `atcoder_account_name` = VALUES(`atcoder_account_name`),
                     `atcoder_rating` = VALUES(`atcoder_rating`),
                     `heuristic_rating` = VALUES(`heuristic_rating`),
-                    `is_algo_team` = VALUES(`is_algo_team`)
+                    `is_algo_team` = VALUES(`is_algo_team`),
+                    `is_active` = VALUES(`is_active`),
+                    `grade` = VALUES(`grade`)
                 "#
             );
         let query = query_builder.build();

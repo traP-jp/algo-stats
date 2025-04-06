@@ -4,9 +4,9 @@ info:
   description: API providing statistics for traP team-algorithm.
   version: 1.0.0
 servers:
-  - url: https://api.algostats.com/v1
+  - url: https://algo-stats.trap.show/v1
     description: Production server
-  - url: http://localhost:8080
+  - url: http://localhost:3000
     description: Development server
 
 paths:
@@ -49,5 +49,13 @@ components:
           type: boolean
           description: Indicates if the user is a member of the Algo team.
           example: true
+        isActive:
+          type: boolean
+          description: Indicates if the user is active.
+          example: true
+        grade:
+          type: string
+          description: The grade of the user.
+          example: "23B"
       required:
         - trapAccountName
