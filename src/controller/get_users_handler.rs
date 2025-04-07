@@ -5,11 +5,13 @@ use axum::{
 };
 use reqwest::StatusCode;
 use std::sync::Arc;
-use crate::domain::persist_repository::PersistRepository as _;
 
-pub async fn handler(
-    Extension(p_repo): Extension<Arc<crate::infra::persist_repository::PersistRepositoryImpl>>,
-) -> Result<impl IntoResponse, StatusCode> {
+pub async fn handler<PR>(
+    Extension(p_repo): Extension<Arc<PR>>,
+) -> Result<impl IntoResponse, StatusCode> 
+where 
+    PR: crate::domain::persist_repository::PersistRepository,
+{
     tracing::info!("Received request to get users");
     let users = p_repo
         .get_users()

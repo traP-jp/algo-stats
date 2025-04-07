@@ -9,9 +9,17 @@ servers:
   - url: http://localhost:3000
     description: Development server
 
+tags:
+  - name: Users
+    description: Operations related to users
+  - name: Ratings
+    description: Operations related to ratings
+
 paths:
   /users:
     get:
+      tags:
+        - Users
       summary: Get a list of all users
       description: Returns a list of all users with their trap account names, AtCoder account names, and AtCoder ratings.
       responses:
@@ -23,6 +31,50 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/User'
+  /rate/algorithm/{trapAccountName}:
+    get:
+      tags:
+        - Ratings
+      summary: Get the algorithm rating of a user
+      description: Returns the algorithm rating of a user based on their trap account name.
+      parameters:
+        - name: trapAccountName
+          in: path
+          required: true
+          description: The trap account name of the user.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The algorithm rating of the user
+          content:
+            application/json:
+              schema:
+                type: integer
+                description: The algorithm rating of the user.
+                example: 1866
+  /rate/heuristic/{trapAccountName}:
+    get:
+      tags:
+        - Ratings
+      summary: Get the heuristic rating of a user
+      description: Returns the heuristic rating of a user based on their trap account name.
+      parameters:
+        - name: trapAccountName
+          in: path
+          required: true
+          description: The trap account name of the user.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The heuristic rating of the user
+          content:
+            application/json:
+              schema:
+                type: integer
+                description: The heuristic rating of the user.
+                example: 1854
 
 components:
   schemas:

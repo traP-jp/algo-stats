@@ -25,6 +25,17 @@ impl crate::domain::persist_repository::PersistRepository for PersistRepositoryI
         Ok(users)
     }
 
+    async fn get_user(&self, trap_account_name: &str) -> Result<Option<crate::domain::dto::User>> {
+        let user = sqlx::query_as::<_, crate::domain::dto::User>(
+            "SELECT * FROM users WHERE trap_account_name = ?"
+        )
+            .bind(trap_account_name)
+            .fetch_optional(&self.pool)
+            .await
+            .map_err(|e| anyhow::anyhow!("Failed to fetch user: {}", e))?;
+        Ok(user)
+    }
+
     async fn set_users(&self, users: Vec<crate::domain::dto::User>) -> Result<()> {
         let mut query_builder = sqlx::QueryBuilder::<sqlx::MySql>::new(
             r#"

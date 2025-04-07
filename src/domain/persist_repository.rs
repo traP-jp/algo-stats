@@ -6,4 +6,5 @@ use super::dto::*;
 pub trait PersistRepository: Send + Sync + 'static {
     async fn get_users(&self) -> Result<Vec<User>>;
     async fn set_users(&self, users: Vec<User>) -> Result<()>;
+    async fn get_user(&self, trap_account_name: &str) -> Result<Option<User>>;
 }

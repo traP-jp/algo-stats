@@ -72,7 +72,15 @@ async fn main() {
         updater.update().await.unwrap();
     }
     let app = Router::new()
-        .route("/users", axum::routing::get(controller::get_users_handler::handler))
+        .route("/users", axum::routing::get(controller::get_users_handler::handler::<infra::persist_repository::PersistRepositoryImpl>))
+        .route(
+            "/rate/heuristic/{trap_account_name}",
+            axum::routing::get(controller::get_rate_handler::heur_handler::<infra::persist_repository::PersistRepositoryImpl>),
+        )
+        .route(
+            "/rate/algorithm/{trap_account_name}",
+            axum::routing::get(controller::get_rate_handler::algo_handler::<infra::persist_repository::PersistRepositoryImpl>),
+        )
         .layer(Extension(persist_repository));
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000")
         .await
